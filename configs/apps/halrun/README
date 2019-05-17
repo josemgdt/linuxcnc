@@ -1,8 +1,8 @@
 halrun:
 
-Start halrun in an xterm
-First command 'help' shows commands
+Iniciar halrun en un xterm
+Primero comande 'help' para mostrar comandos
 
-Note:
-  Linuxcnc must not be running
-  Any other instance of halrun is terminated.
+Nota:
+   Linuxcnc no debe estar ejecutándose
+   Cualquier otra instancia de halrun se terminará.
