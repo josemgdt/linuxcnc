@@ -20,6 +20,8 @@ take any responsibility for such compliance.**
 
 This software is released under the GPLv2, with some parts under the LGPL.
 See the file COPYING for more details.
+La traducción al español esta acogida a las mismas licencias.
+Copyright 2019, Jose M. Garcia <josemgdt@gmail.com>
 
 
 # The Build Process
@@ -28,3 +30,5 @@ Refer to the file 'docs/src/code/building-linuxcnc.txt' for information
 about building and running the software, or look here:
 
 http://linuxcnc.org/docs/devel/html/code/building-linuxcnc.html
+
+
