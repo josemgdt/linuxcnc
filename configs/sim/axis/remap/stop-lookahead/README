@@ -1,12 +1,11 @@
-This is an example remapped code to demonstrate how the interpreter lookahead can be controlled.
+Este es un ejemplo de código reasignado para demostrar cómo se puede controlar el lookahead del intérprete.
 
-See also this forum thread:
+Véase también este hilo del foro:
   http://www.linuxcnc.org/index.php/english/forum/10-advanced-configuration/25994-abort-msg-in-o-sub?start=12#28355
 
-Related:
+Relacionado:
 
-see 'G103 Lookahead Mode', page 152,
-
+vea 'G103 Modo Lookahead', página 152,
 PMAC-NC2 Pro2 Software reference, Delta Tau Systems Inc
 
 http://www.deltatau.com/manuals/pdfs/PMAC-NC%20PRO2.pdf?id=634701792253582640

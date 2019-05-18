@@ -1,22 +1,20 @@
-The 'vismach' directory contains a number of configurations that display a 3D model of the simulated machine.
+El directorio 'vismach' contiene una serie de configuraciones que muestran un modelo 3D de una máquina simulada.
 
-The best place to start is with the rolfmill which is a 3 axis mill built
-using primitives. The rolfmill.hal file is heavly commented with step by
-step instructions on how to build the vismach simulation.
+El mejor lugar para comenzar es rolfmill, que es una fresadora de tres ejes construida con primitivas. El archivo rolfmill.hal esta comentado con las instrucciones paso a paso sobre como construir una simulacion vismach.
 
-These simulations are mostly intended to testing of complex kinematics code by people who don't have those somewhat exotic machines.
+Estas simulaciones están destinadas principalmente a la prueba de código de cinemática compleja por personas que no tienen esas máquinas un tanto exóticas.
 
-All of these configurations work without realtime and without hardware or drivers.
+Todas estas configuraciones funcionan sin tiempo real y sin hardware o controladores.
 
-All of the simulations use the Axis GUI.  It is expected that these configurations will need to be modified as work on joints vs. axes occurs.
+Todas las simulaciones utilizan la GUI Axis. Se espera que estas configuraciones deban modificarse a medida que avance el trabajo en articulaciones vs ejes.
 
-Choices are:
+Las opciones son:
 
--- max5triv.ini: Chris Radek's MaxNC which has been modified to have B and C angular axes.  This version uses trivkins, so does not provide proper multi-axis behavior.
+- max5triv.ini: MaxNC de Chris Radek que ha sido modificado para tener ejes angulares B y C. Esta versión utiliza trivkins, por lo que no proporciona un comportamiento adecuado multi-ejes.
 
--- max5kins.ini: Chris Radek's MaxNC which has been modified to have B and C angular axes.  This version uses maxkins, and allows full 9-axis g-code.
+- max5kins.ini: MaxNC de Chris Radek que se ha modificado para que tenga ejes angulares B y C. Esta versión utiliza maxkins y permite el código g completo de 9 ejes.
 
--- hbm.ini: A large horizontal boring mill.  The quill is configured as the W axis.
+- hbm.ini: Una gran fresadora-mandrinadora horizontal. La pínola (quill) está configurada como eje W.
 
 -- 5axis
 -- hexapod-sim

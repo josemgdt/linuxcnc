@@ -1,27 +1,26 @@
-Sample configurations for remapped codes
+Configuraciones de muestra para códigos remapeados.
 
-This is what the example configs do:
+getting-started: introducción la definición de nuevos códigos en procedimientos NGC y Python
 
-getting-started: introduces defining new codes in NGC procedures and Python
+extend-builtins: demuestra remapeo de códigos internos T, M6, M61, S, F. Esto
+podría ser un punto de partida para su propia configuración. También muestra cómo referirse al comportamiento interno de los códigos.
 
-extend-builtins: demonstrates remapping builtins T,M6,M61,S,F. This could be a starting point for your own configuration. Also shows how to refer to the builtin behaviour of codes.
+manual-toolchange-with-tool-length-switch: M6 extendido para que haga una prueba de longitud de herramienta después del cambio.
 
-manual-toolchange-with-tool-length-switch: extend M6 so it does a tool length probe after the change.
+rack-toolchange: intenta imitar el parche racktoolchanger sin tal parche, sino con remapeo de códigos. 
 
-rack-toolchange: this tries to mimick the racktoolchanger patch - without a patch, but with remapping codes
+cycle: demostración de cómo se pueden crear nuevos códigos de ciclo con subrutinas O-word o Python
 
-cycles: a demo how new cycle codes can be created with O-word subroutines or in Python
+iocontrol-removed: una 'investigación' de la rama de reasignación (ahora fusionada): Demuestra la eliminación de iocontrol por completo y su reemplazo por un complemento de Python en task. Aparte de eso, se usa el ejemplo rack-toolchanger. Además, usa experimentalmente sqlite3 para almacenamiento de herramientas.
 
-iocontrol-removed: a 'research part' of the (now merged) remapping branch: It demonstrates removing iocontrol altogether, and replacing it by a Python plugin in task.  Other than that, the rack-toolchanger example is used. Also, experimentally use sqlite3 for tooltable storage.
+>>>>>>>>>>> No sugerido para uso en producción. <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
->>>>>>>>>>>  Not suggested for production use. <<<<<<<<<<<<<<<<<<<<<<<<
+python-stdglue contiene código Python embebido  que admite los ejemplos anteriores. Esto debería eventualmente evolucionar hacia un código enlatado que los usuarios no necesitan tocar excepto en circunstancias más exóticas. Tenga en cuenta que todos los ejemplos anteriores utilizan el mismo código de unión de remap.py.
 
-python-stdglue contains embedded Python code supporting the above examples. This should eventually evolve into canned code which users need not touch except in more exotic circumstances. Note all examples above use the same glue code from remap.py.
+common_nc_subs: contiene reset_state.ngc, que debe llamarse desde el procedimiento ON_ABORT. Tenga en cuenta que es especialmente importante restablecer el estado modal después de un procedimiento de remapeo fallido porque esto puede dar lugar a fallos continuos (por ejemplo, error ID 3437928). Las demostraciones usan su propio sub_abort sub y llaman a reset_state.
 
-common_nc_subs: this contains reset_state.ngc, which should be called from ON_ABORT procedure.  Note that it is in particular important to reset the modal state after a failed remap procedure because this can lead to susequent failures (e.g. bug ID 3437928).  The demos use their own on_abort sub and call reset_state.
+Documentación de Remapping:
+  http://linuxcnc.org/docs/devel/html/remap/remap.html
 
-Remapping Documentation:
-  http://www.linuxcnc.org/docs/devel/html/remap/structure.html
-
-see also:
+Ver también:
   http://wiki.linuxcnc.org/cgi-bin/emcinfo.pl?RemappingStatus

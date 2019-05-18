@@ -1,16 +1,16 @@
-TWOPASS demo
+Demostración de TWOPASS
 
-Twopass processing of hal files allows multiple specifications for component loadrt lines.
+El procesamiento doble de archivos hal permite especificaciones múltiples para las líneas loadrt de componentes.
 
-To enable twopass processing:
+Para habilitar el procesamiento de dos pasos:
 
 [HAL]
 TWOPASS = on,verbose
 
 
-For debugging, use:
+Para la depuración, utilice:
 TWOPASS = on,verbose,nodelete
 
 
-The verbose option increases output to stdout.
-The nodelete option prevents removal of temporary files.
+La opción verbose aumenta el contenido de la salida estándar.
+La opción nodelete evita la eliminación de archivos temporales.

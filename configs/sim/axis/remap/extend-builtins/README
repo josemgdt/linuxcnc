@@ -1,25 +1,26 @@
-This shows how the builtin T,M6,M61,S,F codes can be redefined, optionally by referring to the builtin behaviour in the remap procedure.
+Esto muestra cómo se pueden redefinir los códigos internos T, M6, M61, S, F, opcionalmente refiriéndose al comportamiento interno en el procedimiento de remapeo.
 
-The collection of prologs and epilogs in python-stdglue is intended to be a boilerplate set of Python glue which covers most use cases. Normally you shouldnt need to touch any of these.
+La colección de prólogos y epílogos en python-stdglue está pensada para ser un conjunto básico de código de unión Python que cubre la mayoría de los casos de uso. Normalmente no debería tocar ninguno de ellos.
 
-The ngc remap routines in nc_subroutines have been set up to:
+Las rutinas de remapeo de ngc en nc_subroutines se han configurado para:
 
-show the 'exposed parameters' with a debug statement
+mostrar los 'parámetros expuestos' con una declaración de depuración
 
-refer to the builtin codes within the remap procedure, such that execution effect is the same as not remapping that code (i.e. the remap result is idempotent)
+referirse a los códigos internos dentro del procedimiento de remapeo, de modo que el efecto de ejecución sea el mismo que el de no remapear ese código (es decir, el resultado del remapeo es idempotente)
 
-to work with the stdglue prologs and epilogs
+Trabajar con los prólogos y epílogos stdglue.
 
-'exposed parameters' are local variables in the remap procedure which can be read, and changed - any changes will be picked up by the epilog and used to commit the result
+Los 'parámetros expuestos' son variables locales en el procedimiento de remapeo que pueden leerse y modificarse. Todos los cambios seran detectados por el epilogo y los utilizará para confirmar el resultado.
 
+Tenga en cuenta que el uso de M61 requiere iocontrol-v2, ya que el soporte para el número de herramientas establecido en iocontrol no funciona.
 
-Note that using M61 requires iocontrol-v2 as set tool number support in iocontrol is broken.
+actualización:
 
-update:
+Agregado remapeado y extensión de M0, M1, M60.
+Véase también el hilo: 
+(link roto) http://linuxcnc.org/index.php/english/component/kunena/func=view&catid=38&id=17637&limit=6#17637
 
-Remapping and extending of M0,M1,M60 added.
-See also thread:
-  http://linuxcnc.org/index.php/english/component/kunena/?func=view&catid=38&id=17637&limit=6#17637
+(link ok?) https://forum.linuxcnc.org/38-general-linuxcnc-questions/17637-m1-behavior start=0#17796
 
 -mah
 
