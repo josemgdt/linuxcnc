@@ -1,12 +1,12 @@
-Qtvcp is an infrastructure for building customized operator
-screen/control panel for LinuxCNC.
+Qtvcp es una infraestructura para la construcción de pantallas/paneles
+de control de operadores personalizados para LinuxCNC.
 
-Built with python 2, QTDesigner and PyQt5
+Construido con python 2, QTDesigner y PyQt5
 
-These are demonstration/testing screens for the QTvcp toolkit.
-These have not been heavily tested to operate real hardware.
-Please test carefully for suitability.
+Estas son pantallas de demostración/prueba para el kit de herramientas QTvcp.
+Estos no han sido muy probados para operar hardware real.
+Por favor, compruebe cuidadosamente la idoneidad.
 
-Qtdefault - is the default test screen
-Blender is inspired by a linuxcnc forum design.
-QtAxis is a QT version of linuxcnc's AXIS screen.
+Qtdefault - es la pantalla de prueba predeterminada
+Blender está inspirado en un diseño del foro de linuxcnc.
+QtAxis es una versión QT de la pantalla AXIS de linuxcnc.

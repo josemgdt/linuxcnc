@@ -1,15 +1,15 @@
-trivkins examples
+Ejemplos de trivkins
 
-xz.ini           KINEMATICS_IDENTITY
+xz.ini            KINEMATICS_IDENTITY
 
-xz_both.ini      KINEMATICS_BOTH
+xz_both.ini       KINEMATICS_BOTH
 
-NOTE:
-!!!  [TRAJ]COORDINATES MUST AGREE WITH KINS:
-!!!  [TRAJ]COORDINATES = xz
+NOTA:
+!!! [TRAJ]COORDINATES DEBE CASAR CON KINS:
+!!! [TRAJ]COORDINATES = xz
 
 xz.ini
-  [KINS]KINEMATICS=trivkins coordinates=xz
+   [KINS]KINEMATICS=trivkins coordinates=xz
 
 xz_both.ini
-  KINEMATICS = trivkins coordinates=xz kinstype=BOTH
+   KINEMATICS = trivkins coordinates=xz kinstype=BOTH
