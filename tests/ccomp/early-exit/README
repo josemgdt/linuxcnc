@@ -1,5 +1,5 @@
-This test starts LinuxCNC, enables cutter comp (with G41.1), then
-immediately cancels cutter comp (with G40) and verifies that the next
-motion goes to the expected location.
+Esta prueba inicia LinuxCNC, habilita la compensación del cortador (con G41.1),
+luego cancela inmediatamente la compensación del cortador (con G40) y verifica 
+que el siguiente movimiento vaya a la ubicación esperada.
 
-In 2.6.12 and 2.7.7 this test replicates Github Issue #160.
+En 2.6.12 y 2.7.7 este test replica el asunto #160 de Github.

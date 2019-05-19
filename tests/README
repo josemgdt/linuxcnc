@@ -1,95 +1,86 @@
-The HAL test suite
-~~~~~~~~~~~~~~~~~~~
-The tests in these directories serve to test the behavior of HAL components.
+│La suite de tests HAL
+---------------------
+Los tests en estos directorios sirven para probar el comportamiento de los componentes HAL.
 
-Each subdirectory of this directory may contain a test item.  The runtests
-script recurses through the directory structure, so multiple tests could
-be structured as
+Cada subdirectorio de este directorio puede contener un elemento de prueba. El script runtests recorre recursivamente
+la estructura del directorio, por lo que los múltiples tests se estructuran como
 	tests/
 		xyz.0
 		xyz.1
 		xyz.2
-or
+o
 	tests/
 		xyz/
 			0	
 			1	
 			2	
 
+Se admiten dos tipos de tests: tests de regresión, en las que la salida es
+probada contra una salida "bien conocida", y tests funcionales, en las que
+la salida alimenta a un programa que puede determinar si es correcta o no
 
-Two types of tests are supported: Regression tests, in which the output is
-tested against a "known good" output, and functional tests, in which the
-output is fed to a program that can determine whether it is correct or not
-
-
-Running the tests
-~~~~~~~~~~~~~~~~~
-Currently, tests only work with the "run in place" configuration.  They
-can be run by executing (from the top emc2 directory)
+Corriendo las pruebas
+---------------------
+Actualmente, las pruebas solo funcionan con la configuración "run in place".
+Se puede ejecutar corriendo (desde el directorio emc2 superior):
 	scripts/runtests tests
-A subset of the tests can also be run:
+También se puede ejecutar un subconjunto de tests:
 	scripts/runtests tests/xyz tests/a*
-The directories named on the commandline are searched recursively for
-'test.hal' or 'test.sh' files, and a directory with such a file is
-assumed to contain a regression test or a functional test.
+Los directorios nombrados en la línea de comandos buscan de forma recursiva
+los archivos 'test.hal' o 'test.sh', y un directorio con dicho archivo
+se supone que contiene un test de regresión o un test funcional.
 
-Tests may contain files other than the ones specified below.  For instance,
-when using 'streamer' data as test input, a shell script with
-"halstreamer<<EOF" and a "here document" will generally be present.
-(see and-or-not-mux.0/runstreamer for an example)
+Las pruebas pueden contener archivos distintos a los especificados a continuación. Por ejemplo, cuando se usan 
+datos 'streamer' como entrada de test, generalmente estarán presentes un script de shell con "halstreamer<<EOF"
+y un "here document". (vea and-or-not-mux.0/runstreamer como un ejemplo)
 
-Regression Tests
-~~~~~~~~~~~~~~~~
-A regression test should consist of these three files:
+Pruebas de regresión
+--------------------
+Una prueba de regresión debe consistir en estos tres archivos:
 	README
-		A human-readable file describing the test
-	test.hal *or* test.sh *or* test
-		The test script to execute.  test.hal is executed with
-		'halrun -f', test.sh is executed with 'bash -x', and
-		test is executed as ./test
+		Un archivo legible por humanos que describe el test.
+	test.hal *o* test.sh *o* test
+		El script de test a ejecutar. test.hal se ejecuta con
+		'halrun -f', test.sh se ejecuta con 'bash -x', y
+		test se ejecuta como ./test
 	expected
-		A file whose contents are compared with the stdout of
-			halrun -f test.hal
+		Un archivo cuyos contenidos se comparan con la salida stdout de
+		halrun -f test.hal
 
-A typical regression test will load several components, usually including
-'threads' and 'sampler', and often including 'streamer', then collect samples
-from some number of calls to the realtime thread, then exit.
+Un test de regresión típico cargará varios componentes, incluyendo generalmente a
+'threads' y 'sampler', y con frecuencia a 'streamer'; luego recolecta muestras
+durante algún número de llamadas al hilo en tiempo real. Luego sale.
 
-Regression test "test.hal" files will almost always include the line
+Los archivos "test.hal" de los test de regresión casi siempre incluirán la línea
 	setexact_for_test_suite_only
-which causes HAL to act as though the requested base_period was available.
-Otherwise, results will differ slightly depending on the actual base_period
-and regression tests will fail.
+que hace que HAL actúe como si el período base_periodo solicitado estuviera disponible. De lo contrario, 
+los resultados diferirán ligeramente dependiendo del período base real y los test de regresión fallarian.
 
-The test passes if the expected and actual output are identical.
-Otherwise, the test fails.
+El test pasa si la salida esperada y real son idénticas. De lo contrario, ha fallado.
 
-
-Functional Tests
-~~~~~~~~~~~~~~~~
-A functional test should consist of three files:
+Pruebas funcionales
+-------------------
+Una prueba funcional debe constar de tres archivos:
 	README
-		A human-readable file describing the test
-	test.hal *or* test.sh *or* test
-		The test script to execute.  test.hal is executed with
-		'halrun -f', test.sh is executed with 'bash -x', and
-		test is executed as ./test
+		Un archivo legible por humanos que describe el test.
+	test.hal *o* test.sh *o* test
+		El script de test a ejecutar. test.hal se ejecuta con
+		'halrun -f', test.sh se ejecuta con 'bash -x', y
+		test se ejecuta como ./test
 	checkresult
-		An executable file (such as a shell or python script)
-		which determines if the stdout of
-			halrun -f test.hal
-		indicates success or failure
+		Un archivo ejecutable (como un script shell o de python)
+		que determina si la salida stdout de halrun -f test.hal
+		indica éxito o fracaso.
 
-Regression test "test.hal" files will often include the line
+Los archivos "test.hal" de los test a menudo incluirán la línea
 	setexact_for_test_suite_only
-which causes HAL to act as though the requested base_period was available.
-Otherwise, results will differ slightly depending on the actual base_period,
-which could affect whether 'checkresult' gives an accurate result.
+que hace que HAL actúe como si el período base_periodo solicitado estuviera disponible. De lo contrario, los
+resultados diferirán ligeramente dependiendo del período base real,lo que podría afectar a si 'checkresult'
+da un resultado preciso.
 
-A typical regression test will load several components, usually including
-'threads' and 'sample', then collect samples from some number of calls
-to the realtime thread, then exit.  'checkresult' will look at the output
-and see if it indicates success.
+Un test típico cargará varios componentes, incluyendo generalmente a 'threads' y 'sampler', y con frecuencia 
+a 'streamer'; luego recolecta muestras durante algún número de llamadas al hilo en tiempo real. Luego sale. 'checkresult' 
+mirará la salida y verá si indica éxito.
 
-The test passes if the command "checkresult actual" returns a shell
-success value (exit code 0).  Otherwise, the test fails.
+El test pasa si el comando "checkresult actual" devuelve un valor shell de éxito (código de salida 0).
+De lo contrario, el test ha fallado.

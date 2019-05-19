@@ -1,2 +1,2 @@
-Tests that the encoder and counter modules give the expected results
-on a simple increasing quadrature input
+Comprueba que los módulos de encoder y contador dan los resultados esperados
+en una entrada simple en cuadratura creciente

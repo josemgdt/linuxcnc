@@ -1,4 +1,9 @@
 
-This test reproduces Issue #117.  It homes an id-kins machine, starts
-a jog, and then (while moving) trips a limit switch (ie a hard limit).
+Esta prueba reproduce el asunto #117. Pone en home una máquina con id-kins,
+inicia un jog y luego (mientras se mueve) dispara un interruptor de límite (es decir, un límite hard).
+
+N.T. El asunto #117 presentaba un fallo consistente en que al alcanzar un limite hard mientras se hacia un jog, la interface de usuario se bloqueaba.
+Fue abierto en 23 Jul 2016 y cerrado (resuelto) en 28 Jul 2016 con el
+commit ef5dc9d769b241f32ddec7cfc32628b5589710b6
+DOC_DUDE ¿es preciso mantener este test?
 

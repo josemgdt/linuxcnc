@@ -1,16 +1,15 @@
-This directory consists of snippets of gcode that should be rejected because
-they are not valid.  All files that match the glob '*.ngc' are tested.
-The first line should consist of a ";" followed by the exact English
-error string that the interpreter should show.  This is followed
-by zero or more lines of test gcode.
+Este directorio consiste en fragmentos de gcode que deben ser rechazados porque
+no son validos. Todos los archivos que coinciden con '*.ngc' son testeados.
+La primera línea debe consistir en un ";" seguido por la cadena de error exacta, en ingles, que el intérprete debe mostrar. Esto es seguido por cero o más líneas de gcode en test.
 
-An individual file is considered to be a failure if
- * it is accepted by the interpreter
- * or the error message does not exactly match the specification
+Un archivo individual se considera erróneo si
+ * Es aceptado por el intérprete.
+	o
+ * el mensaje de error no coincide exactamente con la especificación
 
-An individual file is considered to be bad if
- * it does not contain a parseable error specification
- * the error message cannot be isolated in the interpreter's output
+Un archivo individual se considera malo si
+ * no contiene una especificación de error analizable
+ * el mensaje de error no se puede aislar en la salida del intérprete
 
-If any file is a failure or is bad, then the test as a whole fails and will
-count as 1 failure in the testsuite.
+Si algún archivo es un error o es incorrecto, el test en su totalidad falla y
+contará como 1 fallo en la testuite.

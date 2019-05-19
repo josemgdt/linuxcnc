@@ -1,7 +1,7 @@
-Verify that personalities are used modulo 2 when
-using halcompile --personalities=2
+Verifica que "personalidad" usa modulo 2 cuando se usa
+halcompile --personalities=2
 
-Test in-tree components:
+Test en-arbol de los componentes:
      lincurve
      logic
      bitslice

@@ -1,7 +1,7 @@
 
-This is a test of the hm2_register() function in the hostmot2(9) driver.
+Esta es un test de la función hm2_register() en el controlador hostmot2(9).
 
-It makes a fake AnyIO board (using the hm2_test driver) with a static
-"register file" containing a test pattern.  The fake AnyIO board is
-passed to hm2_register(), and let's see if it panics.
+Crea una falsa tarjeta AnyIO (usando el controlador hm2_test) con un 
+"archivo de registro" estático que contiene un patrón de prueba. La falsa
+tarjeta AnyIO se pasa a hm2_register(), y vemos si entra en pánico.
 

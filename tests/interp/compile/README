@@ -1,6 +1,6 @@
-This test checks that using only public header files, out-of-tree C++ code
-can use the rs274 interpreter.
+Este test verifica que solo se utilicen archivos de cabecera públicos;
+código C++ fuera del árbol puede utilizar el intérprete rs274.
 
-When changes are required in this test after a change in the interpreter,
-this is a breaking change; it should be avoided in stable releases if at
-all possible, and it should be documented whenever it occurs.
+Cuando se requieren cambios en este test después de un cambio en el intérprete,
+este es un cambio de ruptura; debe evitarse en lanzamientos estables en
+todo lo posible, y debe ser documentado siempre que ocurra.
