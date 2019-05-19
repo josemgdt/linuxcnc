@@ -1,70 +1,70 @@
-This directory contains halfiles (*.hal and *.tcl) that are available
-using the LinuxCNC halfile search path or by an explicit directive.
+Este directorio contiene halfiles (*.hal y *.tcl) que están disponibles
+usando la ruta de búsqueda de halfile de LinuxCNC o por una directiva explícita.
 
-The HALLIB_PATH is '.:HALLIB_DIR'
-   The '.' specifies the directory containing the ini file.
-   HALIB_DIR specifies this directory.
+HALLIB_PATH es '.:HALLIB_DIR'
+   '.' especifica el directorio que contiene el archivo ini.
+   HALIB_DIR especifica este directorio.
 
-The explicit directive uses a prefix (LIB:) to identify halfiles:
+La directiva explícita usa un prefijo (LIB:) para identificar halfiles:
   [HAL]
   HALFILE = LIB:filename.[hal|tcl]
 
-The LinuxCNC startup script (linuxcnc) finds each halfile using the
-HALLIB_PATH unless the explicit directive is used.
+El script de inicio de LinuxCNC (linuxcnc) encuentra cada halfile utilizando
+HALLIB_PATH a menos que se use la directiva explícita.
 
-Also included in this directory are files associated with included
-system halfiles.  For example, the button layout files
-(xhc-hb04-layout*.cfg) that are used with the halfile xhc-hb04.tcl.
+También se incluyen en este directorio los archivos asociados con halfiles a incluir del sistema. Por ejemplo, los archivos de diseño de botones
+(xhc-hb04-layout*.cfg) que se utilizan con el halfile xhc-hb04.tcl.
 ------------------------------------------------------------------------
 
 
-Hal files (*.hal)          Notes
+Hal files (*.hal)          Notas
 -----------------------    ---------------------------------------------
-axis_manualtoolchange.hal  setup for using hal_manualtoolchange
-                             (for axis or other guis)
-core_sim.hal               xyz simulator config
-core_servo.hal             xyz servo (pid) config
-core_sim9.hal              9 axis (xyzabcuvw) simulation config
-core_stepper.hal           xyz stepper config
-gantrysim.hal              gantrykins config, 4 joints: X Y Y Z
-lathe.hal                  simulate spindle with encoder,sim_encoder
-locking_indexer.hal        simulate locking rotary using timedelay comp
-wheeljogpins.tcl           enable wheel jog pins for joints & axes
-moveoff_external.hal       Simulate external control connections for
-                             a moveoff component
-servo_sim.hal              simulate servo (pid) xyz using lowpass comp
-sim_spindle_encoder.hal    simulate spindle with lowpass filter
-simulated-gantry-home.hal  simulate gantry home switches (4 joints)
-simulated_home.hal         simulate xyz home switches
-simulated_limits.hal       simulate xyz limit switches
-tripodsim.hal              simulated tripodkins system
+axis_manualtoolchange.hal  Configuración para usar hal_manualtoolchange
+                             (para Axis u otras guis)
+core_sim.hal               Configuración de simulacion xyz
+core_servo.hal             Configuración de servo xyz (pid)
+core_sim9.hal              Configuración de simulacion de 9 ejes (xyzabcuvw)
+core_stepper.hal           Configuración de stepper xyz
+gantrysim.hal              Configuración gantrykins, 4 articulaciones: X Y Y Z
+lathe.hal                  simular husillo con codificador,sim_encoder
+locking_indexer.hal        simular el bloqueo rotativo con el componente timedelay
+wheeljogpins.tcl           habilitar pines para jog de volante en articulaciones y
+                             ejes
+moveoff_external.hal       simular conexiones de control externo para
+                             un componente moveoff
+servo_sim.hal              simular servo (pid) xyz usando componente lowpass
+sim_spindle_encoder.hal    simular husillo con filtro lowpass
+simulated-gantry-home.hal  simular switches home en portico (4 articulaciones)
+simulated_home.hal         simular switches home xyz
+simulated_limits.hal       simular switches limite xyz  
+tripodsim.hal              sistema simulado tripodkins 
 
-Haltcl Files (*.tcl)       Notes
+Archivos Haltcl (*.tcl)       Notas
 -----------------------    ---------------------------------------------
-basic_sim.tcl              set up a sim config (arbitrary no. of axes)
-var_show.tcl               show ini variables and context
+basic_sim.tcl              configuración sim (número arbitrario de ejes)
+var_show.tcl               muestra variables ini y contexto
 
-hookup_moveoff.tcl         make connections for a moveoff component
+hookup_moveoff.tcl         realiza conexiones para un componente moveoff
 
-xhc-hb04.tcl               Configuration builder for xhc-hb04 pendant
-xhc-hb04-layout1.cfg         button layout 1 for xhc-hb04.tcl
-xhc-hb04-layout2.cfg         button layout 2 for xhc-hb04.tcl
+xhc-hb04.tcl               Constructor de configuración para el colgante xhc-hb04
+xhc-hb04-layout1.cfg         Diseño de botónes 1 para xhc-hb04.tcl
+xhc-hb04-layout2.cfg         Diseño de botónes 2 para xhc-hb04.tcl
 
-halcheck.tcl               Report: 1) functions without addf
-                                   2) signals with no inputs
-                                   3) signals with no output
+halcheck.tcl               Informe: 1) funciones sin addf
+                                    2) señales sin entradas
+                                    3) señales sin salida
 
 Haltcl libs (*_lib.tcl)    Notes
 -----------------------    ---------------------------------------------
-sim_lib.tcl                simulator config procedures
+sim_lib.tcl                procedimientos de configuración del simulador
                              procs:
-                               core_sim       (arbitrary axes)
-                               make-ddts      (arbitrary axes)
-                               simulated_home (arbitrary axes)
+                               core_sim       (ejes arbitrarios)
+                               make-ddts      (ejes arbitrarios)
+                               simulated_home (ejes arbitrarios)
                                use_hal_manualtoolchange
                                sim_spindle
-util_lib.tcl               utility procedures
+util_lib.tcl               Procedimientos de utilidad
                              procs:
-                               show_context (calling parms)
-                               show_ini     (ini file settings)
-                               show_env     (environmental vars)
+                               show_context (parametros de llamada)
+                               show_ini     (configuración de archivo ini)
+                               show_env     (variables de entorno)
