@@ -1,75 +1,67 @@
-source-highlighting EMC langues in HTML documents
+Resaltado de lenguajes fuente de EMC en documentos HTML
 =================================================
 
-I've created GNU source-highlight language definitions for G-code and
-halcmd to highlight .hal and .ngc files in asciidoc. .ini file
-highlighting works out of the box. All three need a bit of trickery to
-work cleanly for both html and pdf.
+He creado las definiciones de lenguaje GNU source-highlight para G-code y
+halcmd para resaltar los archivos .hal y .ngc en asciidoc. 
+El resaltado de archivos .ini trabaja externamente. Los tres necesitan algun truco para trabajar limpiamente tanto para html como para pdf.
 
-Highlighting is for HTML output only at this point in time.  To have
-PDF's highlighted, the file
-/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty needs to be
-extended to deal with ngc, hal and ini formats, and put into the build
-directory so dblatex can find it.
+El resaltado es para la salida HTML solo en este momento. Para tener PDF resaltado, el archivo /usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty necesita ser
+ampliado para tratar con los formatos ngc, hal e ini, y ponerlo en el directorio de compilación para que dblatex pueda encontrarlo.
 
-Highlighting halcmd, ini and ngc source in HTML is now integrated into
-the documentation build process. tcl, python, sh etc keep working out
-of the box.
+Ahora se resalta las fuentes halcmd, ini y ngc en HTML, integrado en el proceso de compilación de la documentación. tcl, python, sh etc sigue trabajando externamente.
 
-NB: source-highlight's mechanisms to find .lang and .map files is
-very inflexible which is why the complete source language definition
-directoy (/usr/share/source-highlight) needs to be replicated under 'local',
-and a new lang.map generated in there (all language definitions are
-relative to this directory, and include each other).
+NB: los mecanismos de resalte de fuentes para encontrar archivos .lang y .map son
+muy inflexibles, por lo que el directorio de definición completa del lenguaje fuente (/usr/share/source-highlight) debe replicarse en 'local',
+y generar un nuevo lang.map allí (todas las definiciones de idiomas son
+relativa a este directorio, e incluidas entre sí).
 
-Using ngc, hal and ini file snippets in your .txt files:
-========================================================
-Copy this to the top of your txt file:
------------------ snip ----------------
-:ini: {basebackend@docbook:'':ini}
-:hal: {basebackend@docbook:'':hal}
-:ngc: {basebackend@docbook:'':ngc}
+Usando fragmentos de archivos ngc, hal e ini en sus archivos .txt:
+==================================================================
+Copie esto en la parte superior de su archivo txt:
+----------------- fragmento ----------------
+: ini: {basebackend@docbook:'':ini}
+: hal: {basebackend@docbook:'':hal}
+: ngc: {basebackend@docbook:'':ngc}
 
-// begin a listing of ini/hal/ngc files like so:
-//[source,{ini}]
-//[source,{hal}]
-//[source,{ngc}]
------------------ snip ----------------
+// comenzar una lista de archivos ini/hal/ngc así:
+// [source,{ini}]
+// [source,{hal}]
+// [source,{ngc}]
+----------------- fragmento ----------------
 
-Adding or changing a langauage definition (.lang) file
-======================================================
+Agregar o cambiar un archivo de definición de idioma (.lang)
+================================================== ====
 
-New language: just drop <name>.lang into this directory. The
-source-highlight configuration will be rebuilt to include this
-language. <name> then can be used in [source,{named}] listings. You
-might need a conditional like
+Nuevo idioma: simplemente coloque <nombre>.lang en este directorio.
+Se reconstruirá la configuración de resaltado de fuente para incluir este
+idioma. <nombre> se puede usar luego en las listas [source,{nombre}].
+Podría necesitar un condicional como
 
-:name: {basebackend@docbook:'':name}
+:nombre: {basebackend@docbook:'':nombre}
 
-to prevent pdflatex formatting errors.
+para evitar errores de formato pdflatex.
 
-Changing a language defintion: just edit the .lang file in this directory.
+Cambiar una definición de idioma: simplemente edite el archivo .lang en este directorio.
 
-Overruling definitons in the source-highlight standard language definitions:
+Anulando las definiciones en las definiciones de lenguaje estándar de resaltado de fuente:
 
-Copy the <language>.lang file from /usr/share/source-highlight into
-this directory and edit as needed. The right things should happen on
-build (including a massive initial rebuild ;-)
+Copie el archivo <language>.lang de /usr/share/source-highlight en
+este directorio y editar según sea necesario. Las cosas correctas deberían pasar al
+construir (incluyendo una reconstrucción inicial masiva ;-)
 
 
-Building HTML examples in the this directory
+Construyendo ejemplos HTML en este directorio.
 ============================================
 
-To produce pdf and html samples, type 'make examples' .
+Para producir muestras en formato pdf y html, escriba "make examples".
 
-This should produce {ini-demo,hal-demo,ngc-demo}.{pdf,html} files in
-the current directory, with proper highlighing of HTML only. PDF files
-come out properly but have no highlighting.
+Esto debería producir archivos {ini-demo,hal-demo,ngc-demo}.{Pdf,html} en
+el directorio actual, con el resaltado correcto de HTML solamente. Los archivos PDF
+saldrán correctamente pero no tendrán resaltado.
 
 --------------------------------------------
 
-I found this tool very helpful for writing GNU source-highlight .lang
-definitions:
+He encontrado esta herramienta muy útil para escribir definiciones GNU source-highlight.lang:
 
 http://srchighliteide.sourceforge.net/
 
