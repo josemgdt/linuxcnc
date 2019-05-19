@@ -1,40 +1,32 @@
-This is an example of RTAPI semaphores between two real-time
-processes. 
+Este es un ejemplo de semáforos RTAPI entre dos procesos en tiempo real.
 
-NOTE: The basic concepts of this example haven't changes since
-this was originally written, but some details have changed.
-See the notes below.
+NOTA: Los conceptos básicos de este ejemplo no han cambiado desde que se 
+escribió originalmente, pero algunos detalles si han cambiado.
+Vea las notas a continuación.
 
-The master process (master.c) creates a semaphore,
-'master_sem', and runs a period timer task every millisecond that
-gives the semaphore and accumulates a local count of the number of
-times it has been given.
-NOTE: Changed to every 1 second to make prints to the kernel message
-log readable.
+El proceso maestro (master.c) crea un semáforo, 'master_sem', y ejecuta una tarea de temporizador periodica
+cada milisegundo que da el semáforo y acumula un conteo local de la cantidad de veces que se le ha dado.
+NOTA: Cambiado a cada 1 segundo para que las escrituras en el registro de mensajes del kernel sean legibles.
 
-The slave process (slave.c) creates a task that blocks on the global
-semaphore 'master_sem' and accumulates a local count of the number of
-times it has been taken.
-NOTE: The semaphore is no longer global, instead the master and
-slave share it by opening it with the same key.
+El proceso esclavo (slave.c) crea una tarea que bloquea el semáforo global 'master_sem' y acumula un conteo local
+de la cantidad de veces que se ha tomado.
+NOTA: El semáforo ya no es global; en cambio, el maestro y el esclavo lo comparten
+abriéndolo con la misma clave.
 
-The slave task is not attached to a timer, accomplished by passing
-a 0 for the 'period_nsec' argument of rtapi_task_start() and then
-manually running its first occurrence by calling rtapi_task_resume().
-NOTE: The slave is still not attached to a timer.  I refer to this
-as being "free-running".  However the task_new and task_start api
-has changed, you no longer call task_start for a free-running task,
-instead you call task_resume only.
+La tarea esclava no se adjunta a un temporizador, se logra al pasar un 0 al argumento 'period_nsec' de rtapi_task_start()
+y luego ejecutar su primera aparición manualmente llamando a rtapi_task_resume().
+NOTA: El esclavo todavía no está conectado a un temporizador. 
+Esto se refiere como "free-running". Sin embargo, la API task_new y
+task_start han cambiado; ya no se llama a task_start para una tarea 
+free-runing. En su lugar, solo se llama a task_resume.
 
-Since the slave process references a global variable, 'master_sem',
-declared in common.h and defined in master.c, master.o must be loaded
-before slave.o or an undefined symbol will result.
-NOTE: No longer true.  Since both modules open the semaphore using
-a key, they can be loaded in any order.  The semaphore is not global,
-and the only thing in common.h is a #define for the key.
+Como el proceso esclavo hace referencia a una variable global, 'master_sem',
+declarada en common.h y definida en master.c, master.o debe cargarse antes
+de que aparezca slave.o o resultara un símbolo indefinido.
+NOTA: Esto ya no es cierto. Dado que ambos módulos abren el semáforo con una
+clave, se pueden cargar en cualquier orden. El semáforo no es global, y lo
+único en común es la directiva #define para la clave.
 
-The cumulative counts are printed to the console when the tasks are
-deleted. They should be about the same, differing only by the number
-of times the master task gave the semaphore before the slave task was
-initiated.
-
+Los recuentos acumulativos se imprimen en la consola cuando se eliminan
+las tareas. Deben ser casi iguales, diferenciándose solo por el número
+de veces que la tarea maestra dio el semáforo antes de que se iniciara la tarea esclava.

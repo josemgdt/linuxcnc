@@ -1,230 +1,223 @@
-README for RTAPI
+README para RTAPI
 
-RTAPI is a wrapper API that allows realtime programs to use either
-RTLinux or RTAI with no code changes.
+RTAPI es una API que envuelve a RTLinux y RTAI y que permite que los programas en
+tiempo real se utilicen sin cambios de código.
 
-Files:
+Archivos:
 
-Makefile        : the Makefile
-README          : this file
-rtapi.h         : decls for the generic RTAPI functions.
-rtapi_app.h     : decls for the kernel modules
-rtapi_common.h  : Collection of typedefs, etc,  used internally by RTAPI.
-procfs_macros.h : Macros used to impliment the /proc interface
-rtapi_proc.h    : more stuff implementing the /proc interface
-rtai_rtapi.c    : implementation of real-time API, for RTAI
-rtai_ulapi.c    : implementation of user-level API, for RTAI
-uspace_rtapi.c  : implementation of real-time API, for POSIX RTOS
-uspace_ulapi.c  : implementation of user-level API, for POSIX RTOS
+Makefile		: el Makefile
+README		: este archivo
+rtapi.h		: declaraciones para las funciones genéricas de RTAPI.
+rtapi_app.h		: declaraciones para los módulos del kernel
+rtapi_common.h	: Colección de typedefs, etc., utilizada internamente por RTAPI.
+procfs_macros.h	: Macros utilizadas para implementar la interfaz /proc
+rtapi_proc.h	: más cosas que implementan la interfaz /proc
+rtai_rtapi.c	: implementación de API en tiempo real, para RTAI
+rtai_ulapi.c	: implementación de la API de nivel de usuario, para RTAI
+uspace_rtapi.c	: implementación de API en tiempo real, para RTOS POSIX 
+uspace_ulapi.c	: implementación de API de nivel de usuario, para RTOS POSIX 
 
 
-../../Makefile.inc    : contains compile-time flags, etc.
-../../configure       : script that creates Makefile.inc
+../../Makefile.inc: contiene banderas de tiempo de compilación, etc.
+../../configure: script que crea Makefile.inc
 
-The Build Process
------------------
-The build process follows the standard Linux convention:
+El proceso de construcción
+--------------------------
+El proceso de construcción sigue la convención estándar de Linux:
 
 ./configure
 make
 
-The configure script and make are intended to be run from the
-root of the emc2 tree, to make the entire emc2 project.  See the
-README in that directory for more details.
+El script de configuración y make están diseñados para ejecutarse desde la
+raíz del árbol emc2, para construir todo el proyecto emc2. Ver el
+README en ese directorio para más detalles.
 
-To run the examples:
+Para ejecutar los ejemplos:
 
-1. Open a shell window, and begin watching the kernel log:
+1. Abra una ventana de shell y comience a ver el registro log del kernel:
 
 tail -f /var/log/messages
 
-leave this running, and go back to your original shell window
-you should be in the emc2 directory
+deje esto en marcha y vuelva a su ventana de shell original;
+debería estar en el directorio emc2
 
-2. Load the RTOS and RTAPI modules:
+2. Cargue los módulos RTOS y RTAPI:
 
-Note: for this and most of the following steps you will need
-to be root, or use 'su -c "<command>"'
+Nota: para esto y la mayoría de los siguientes pasos que necesitará
+ser root, o use 'su -c "<comando>"'
 
 scripts/load_rtapi
 
-See a number of messages pop up in the kernel log as components
-of the RTOS are installed...
-One of the last ones will be:
+Vera una serie de mensajes emergentes en el registro del kernel conforme los componentes del RTOS están instalandose ...
+Una de las últimas será:
 
 <date> <time> <host> kernel: RTAPI: Init complete
 
-This means that the rtapi module (rtai_rtapi.o) is loaded.
+Esto significa que el módulo rtapi (rtai_rtapi.o) está cargado.
 
-3. Run the timer task example:
+3. Ejecute el ejemplo del temporizador de tarea:
 
 /sbin/insmod rtlib/timertask.o
 
-A few messages will pop up in the kernel log as the task
-is created and started:
+Aparecerán algunos mensajes en el registro del kernel conforme la tarea
+se crea y se inicia:
 
 <date> <time> <host> kernel: timertask init: desired clock 10000000, actual 10000168
 <date> <time> <host> kernel: timertask init: started timer task
 <date> <time> <host> kernel: timertask init: max delay = 2500042
 
-Wait a few seconds, then remove the module:
+Espera unos segundos, luego quite el módulo:
 
 /sbin/rmmod timertask
 
-A couple more messages from timertask:
+Un par de mensajes más de timertask:
 
-<date> <time> <host> kernel: timertask exit: timer count is 8174
+<fecha> <hora> <host> kernel: kernel: timertask exit: timer count is 8174
 
-This means that 8174 calls to the task were made. (I let it
-run for about 8 seconds.)
+Esto significa que se hicieron 8174 llamadas a la tarea. (Se dejo correr durante unos 8 segundos)
 
-4. Run the parallel port interrupt example:
+4. Ejecute el ejemplo de interrupción de puerto paralelo:
 
 /sbin/insmod rtlib/extint.o
 
-Short pin 10 to pin 25 on the parallel port a couple of times to
-generate some interrupts, then view the count in the kernel log:
+Cortocircuite el pin 10 con el pin 25 en el puerto paralelo un par de veces para
+generar algunas interrupciones, luego vea el recuento en el registro del kernel:
 
 /sbin/rmmod extint
 
-Again, you'll get messages from the extint module:
+De nuevo, obtendrá mensajes del módulo extint:
 
 <date> <time> <host> kernel: extint: interrupt count is 2522
 
-This means 2,522 interrupts occurred, many for a single short
-of pin 10 due to contact noise.
+Esto significa que se produjeron 2,522 interrupciones, muchas para un solo cortocircuito del pin 10 debido
+al ruido de contacto.
 
-5. Run the shared memory example:
+5. Ejecute el ejemplo de memoria compartida:
 
 /sbin/insmod rtlib/shmemtask.o
 
 bin/shmemusr
 
-See the shared memory heartbeat incrementing.
-Use crtl-C to break out of shmemusr.
-Then remove the realtime task
+Vea el aumento de los latidos de la memoria compartida.
+Utilice crtl-C para salir de shmemusr.
+A continuación, elimine la tarea en tiempo real
 
 /sbin/rmmod shmemtask
 
-6. Run the semaphore example:
+6. Ejecutar el ejemplo de semáforo:
 
 /sbin/insmod rtlib/master.o
 
-The master task will start giving the semaphore once per
-second, printing to the log when it does.
+La tarea master comenzará a dar el semáforo una vez por
+segundo, imprimiendo en el registro cuando lo hace.
 
 /sbin/insmod rtlib/slave.o
 
-The slave attempts to get the semaphore, and prints each
-time it succeeds.  Since the master has already given the
-semaphore several times, and it is a counting semaphore,
-the slave will run several times in a row.  Once it catches
-up with the master, it will run right after the master runs.
-Stop the tasks in reverse order:
+El esclavo intenta obtener el semáforo e imprime cada vez
+que tiene éxito. Dado que el maestro ya ha dado el
+semáforo varias veces, y es un semáforo contando,
+el esclavo correrá varias veces seguidas. Una vez que atrapa
+al maestro, se ejecutará justo después de que se ejecute el maestro.
+Detener las tareas en orden inverso:
 
 /sbin/rmmod slave
 /sbin/rmmod master
 
-7. Run the FIFO example:
+7. Ejecutar el ejemplo FIFO:
 
 /sbin/insmod rtlib/fifotask.o
 
-The realtime fifotask will begin writing strings to the
-fifo once per second, and echoing the strings to the log
-file.
+fifotask en tiempo real comenzará a escribir cadenas a la
+fifo una vez por segundo, y haciendo eco de las cadenas en el archivo de log.
 
 bin/fifousr
 
-The user mode program will read strings from the fifo and
-and print them out.
+El programa de modo de usuario leerá cadenas del fifo y
+los imprimira.
 
-Use ctrl-c to exit fifousr, and stop the task:
+Use ctrl-c para salir de fifousr y detener la tarea:
 
 /sbin/rmmod fifotask
 
 
-8. More elaborate tests:
+8. Pruebas más elaboradas:
 
-In theory, you should be able to run any or all of the
-above tests at the same time, doing insmod's and rmmod's
-in any order.
+En teoría, debería poder ejecutar cualquiera o todas las
+pruebas anteriores al mismo tiempo, haciendo insmod's y rmmod's
+en cualquier orden.
 
-9. Shutting down.
+9. Apagado.
 
-To remove the rtapi and the rest of the RTOS modules:
+Para eliminar rtapi y el resto de los módulos RTOS:
 
 scripts/unload_rtapi
 
-If any tasks are still running, the script should print
-the module names and refuse to proceed.  Shut down the
-modules (rmmod) and try again.
+Si alguna tarea se está ejecutando, el script debería imprimir
+los nombres de los módulos y se niega a continuar. Apagar los
+módulos (rmmod) y volver a intentarlo.
 
-The /proc/rtapi Interface
+La interfaz /proc/rtapi
 -------------------------
 
-Various files in /proc/rtapi provide information on the internal status
-of RTAPI. In order, these are:
+Varios archivos en /proc/rtapi proporcionan información sobre el estado interno
+de la RTAPI. Estos son, en orden:
 
-  debug   : Shows which message types will be printed to /var/log/messages.
-            This can be altered by writing a digit to debug. See rtapi.h
-	    for the relevant values.
+  debug:	Muestra qué tipos de mensajes se imprimirán en /var/log/messages.
+            Esto se puede alterar escribiendo un dígito a debug. Ver rtapi.h
+            para los valores relevantes.
 
-  fifos   : Lists the fifos currently in use, and by which process ID.
+  fifos: 	Enumera los fifo actualmente en uso, y según qué ID de proceso.
 
-  modules : Lists the loaded module names, IDs, and the type
-            (realtime or user space).
+  modules:  Muestra los nombres de los módulos cargados, los ID y el tipo
+            (en tiempo real o espacio de usuario).
 
-  sems    : Lists the semaphores currently in use.
+  sems:     Enumera los semáforos actualmente en uso.
 
-  shmem   : Lists the shared memory allocated and the size.
+  shmem:    Muestra la memoria compartida asignada y el tamaño.
 
-  status  : Provides information about the number of tasks, and timer status.
+  status:   Da información sobre la cantidad de tareas y estado del temporizador.
 
-  tasks   : Lists task ID, priority, etc.
+  tasks:    Lista de tareas ID, prioridad, etc.
 
-For a quick look at the status of the rtapi, do "cat /proc/rtapi/*"
+Para ver rápidamente el estado de rtapi, haga "cat /proc/rtapi/*"
 
-The Uninstall Process
+El proceso de desinstalación
 ---------------------
 
 make clean
 
-Code Layout
+Diseño de código
 -----------
 
-The code is split among src/ and example/ directories, each with its
-own Makefile. There is also a top-level Makefile and a Makefile.inc
-that is included by each of the src/ Makefiles. The 'configure' script
-creates Makefile.inc based on some heuristics that determine whether
-you have RTL or RTAI, and defines compiler flags accordingly. The
-config script is a shell script (/bin/sh), which gives great
-flexibility in what can be done. 'config' currently checks to see what
-real-time Linux installations exist, using 'find' and checking for
-"rtl.mk" and ".buildvars" as the telltale signs. If found, RTDIR is set
-to the associated parent directory.
- Alternatively, RTDIR can be set via a command line argument as described
-in "The Build Process". This gives us the flexibility to cross-compile on
-a system not running a realtime kernel.
+El código se divide entre los directorios src/ y example/, cada uno con su
+propio Makefile. También hay un Makefile de nivel superior y un Makefile.inc
+que es incluido por cada uno de los src/Makefiles. El script de configuración
+crea Makefile.inc basado en algunas heurísticas que determinan si
+tiene RTL o RTAI, y define las banderas del compilador en consecuencia.
+El script de configuración es un script de shell (/bin/sh), que proporciona una gran flexibilidad en lo que se
+puedehacer. 'config' actualmente verifica que existen instalaciones de Linux en tiempo real, usando 'find' y buscando
+"rtl.mk" y ".buildvars" como signos indicativos. Si se encuentra,RTDIR se establece al directorio padre asociado.
+Alternativamente, RTDIR se puede configurar a través de un argumento de línea de comando como se describe en
+"El Proceso de Construcción". Esto nos da la flexibilidad de compilación cruzada en un sistema que no ejecuta
+un kernel en tiempo real.
 
-If an installation is found, then symbols for the RT Linux type,
-compile flags, etc. are included in the Makefile.inc. If an invalid
-directory is specified, or the correct marker file is not found, configure
-will exit with a "Usage" message.
+Si se encuentra una instalación, entonces los símbolos para el tipo RT Linux,
+las banderas de compilación, etc. son incluidas en el archivo Makefile.inc. Si se especifica un directorio
+invalido o no se encuentra el archivo marcador correcto, configure saldrá con un mensaje de "Uso".
 
 
 Makefiles
 ---------
-The general form for a makefile entry is:
+La forma general para una entrada de makefile es:
 
 target : dependencies
 	rules
 
-where <target> is what you want made, <dependencies> are the things
-the target depends on, and <rules> are how to build the target from the
-dependencies. Lines can be continued with the \ backslash character at
-the end of the line to be continued. Each line of the rules must begin
-with a TAB character. In general a makefile entry looks more like
-this: 
+donde <target> es lo que se quiere hacer, <dependencies> son las cosas
+de las que depende target, y <rules> dice cómo construir el target desde las
+dependencias. Las líneas se pueden continuar con el carácter \ barra invertida
+al final de la línea que continuará. Cada línea de reglas debe comenzar con un carácter TAB. En general, una
+entrada de makefile se parece más a esto:
 
 target : dependency_1 dependency_2 \
 	... \
@@ -235,38 +228,34 @@ target : dependency_1 dependency_2 \
 [TAB]	...
 [TAB]	rule_n
 
-You can only have one target per entry, but as many dependencies and
-rules as you need. You can also have multiple different entries for
-the same target; you can see this at the end of the Makefiles with the
-header file dependencies generated by 'makedepend', after the "DO NOT
-REMOVE THIS LINE" line.
+Solo puede tener un target por entrada, pero tantas dependencias y
+reglas como necesite. También puede tener múltiples entradas diferentes para
+el mismo target; puede ver esto al final de los Makefiles con el
+archivo de encabezado de dependencias generado por 'makedepend', después de la linea "DO NOT REMOVE THIS LINE".
 
-In order to minimize the number of files, each src/ Makefile compiles
-directly into the lib/ or bin/ directories. Thus, the targets and
-rules aren't as simple as this:
+Con el fin de minimizar el número de archivos, cada src/Makefile compila
+directamente en los directorios lib/ o bin/. Por ello, los objetivos y las reglas no son tan simples como esto:
 
 foo.o : foo.c
 	gcc -c foo.c -o foo.o
 
-but look like this:
+sino que se ven así:
 
 LIB_DIR = ../../lib
 
 $(LIB_DIR)/foo.o : foo.c
 	gcc -c foo.c -o $(LIB_DIR)/foo.o
 
-This means that the resulting .o file doesn't lie around in the
-current directory, but is generated directly in the ../../lib
-directory.
+Esto significa que el archivo .o resultante no se encuentra en el directorio actual, sino que se genera directamente
+en el directorio ../../lib.
 
-The actual rules are a little more complicated since we like to use
-make's shorthand variables. These are:
+Las reglas actuales son un poco más complicadas ya que se usan las abreviaturas de variables de make. Estas son:
 
-$@	for the target
-$<	for the first dependency
-$^	for all the dependencies
+$@	para el target
+$<	para la primera dependencia
+$^	para todas las dependencias
 
-The preceding example would then be
+El ejemplo anterior sería entonces
 
 LIB_DIR = ../../lib
 
@@ -274,8 +263,7 @@ $(LIB_DIR)/foo.o : foo.c
 	gcc -c $< -o $@
 
 
-Configuration Notes
+Notas de configuración
 -------------------
-chmod a+rw /dev/rtai_shm, for RTAI
-chmod a+rw /dev/mem, for mbuff
-
+chmod a+rw /dev/rtai_shm, para RTAI
+chmod a+rw /dev/mem, para mbuff

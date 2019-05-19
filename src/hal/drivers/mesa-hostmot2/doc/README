@@ -1,14 +1,13 @@
 
-Docs for the Anything I/O boards are available from Mesa at
+Los documentos para las placas de E/S Anything están disponibles en Mesa
 <http://www.mesanet.com>.
 
 
-The docs for the PLX chipsets used on the PCI Anything I/O boards is
-available gratis but not libre from plxtech.com.
+La documentación de los conjuntos de chips PLX utilizados en las placas de E/S PCI Anything está
+disponible gratis, pero no libre, en plxtech.com.
 
 
-Reasonable documentation of EPP parallel port programming is available
-in the moschip 9805 docs here:
+Una razonable documentación de la programación del puerto paralelo EPP está disponible
+en los documentos moschip 9805 aquí:
 
-    <http://www.moschip.com/data/products/NM9805/Data%20Sheet_9805.pdf>
-
+     <http://www.moschip.com/data/products/NM9805/Data%20Sheet_9805.pdf>

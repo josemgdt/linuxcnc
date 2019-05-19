@@ -1,2 +1,1 @@
-spun out as separate class since it's used by interp and task
-no reason to keep it an interp method
+se distribuye como una clase separada, ya que es utilizada por interp y task sin ninguna razón para mantenerla como un método de interp

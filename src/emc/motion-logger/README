@@ -1,5 +1,5 @@
 
-motion-logger connects to the NML shared memory regions in the same
-way Motion does, but just logs all incoming emcmot commands to disk,
-for testing reasons.
+motion-logger se conecta a las regiones de memoria compartida NML de
+la misma forma que Motion, pero solo registra los comandos emcmot 
+entrantes en el disco, con propósitos de pruebas.
 

@@ -1,47 +1,46 @@
-README file for AXIS, a front-end for LinuxCNC
-Copyright (C) 2004, 2005, 2006 Jeff Epler <jepler@unpythonic.net> and
+Archivo README para AXIS, un front-end para LinuxCNC
+Copyright (C) 2004, 2005, 2006 Jeff Epler <jepler@unpythonic.net> y
     Chris Radek <chris@timeguy.com>
 
 
 
-ABOUT AXIS
+SOBRE AXIS
 ==========
 
-AXIS is a front-end for LinuxCNC with file preview and live plot.
+AXIS es un front-end para LinuxCNC con vista previa de archivo y ploteado en vivo.
 
-The AXIS user interface is intended to be self-documenting by use of
-familiar controls and plain language on tooltips and menus.  A few less
-evident features are documented by Help > Quick Reference.
+La interfaz de usuario AXIS está diseñada para autodocumentarse mediante el uso de
+controles familiares y lenguaje sencillo en mensajes emergentes y menús. Las 
+características menos evidentes están documentadas en Ayuda > Referencia rápida.
 
-Python 2.4 or newer with Tkinter is required.  Hardware accelerated
-OpenGL is nice, but not required.
+Con Tkinter, se requiere Python 2.4 o más reciente. Es de agradecer hardware acelerado OpenGL, pero no es obligatorio.
 
 
-INSTALLATION
+INSTALACIÓN
 ============
 
-AXIS is now automatically built with LinuxCNC when the required packages
-are installed.
+AXIS ahora se construye automáticamente con LinuxCNC cuando los paquetes requeridos
+están instalados.
 
 
-LICENSE
+LICENCIA
 =======
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+Este programa es software libre; Puede redistribuirlo y/o modificarlo
+bajo los términos de la Licencia Pública General GNU tal como fue publicada por
+la Fundación de Software Libre; ya sea la versión 2 de la Licencia, o
+(a su elección) cualquier versión posterior.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Este programa se distribuye con la esperanza de que sea útil,
+pero SIN NINGUNA GARANTÍA; sin ni siquiera la garantía implícita de
+COMERCIABILIDAD o APTITUD PARA UN PROPÓSITO PARTICULAR. Ver
+GNU General Public License para más detalles.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+Debería haber recibido una copia de la Licencia Pública General de GNU
+junto con este programa; Si no, escriba a Free Software
+Foundation, Inc., 51 Franklin Street, quinto piso, Boston, MA 02110-1301 EE.UU.
 
 
-Portions of the program, located in the "thirdparty" subdirectory of the
-source distribution, are covered by other licenses.  Please see those
-files for details.
+Las partes del programa, ubicadas en el subdirectorio "thirdparty" de la
+distribución fuente, están cubiertas por otras licencias. Por favor vea esos
+archivos para mas detalles.
